@@ -30,3 +30,16 @@ def get_product_by_id(id: int):
             return product
     return None  # Return None if not found
 
+
+@app.post("/product")
+def add_product(product: Product):
+    products.append(product)
+    return product
+
+@app.put("/product")
+def update_product(product: Product):
+    for i, p in enumerate(products):
+        if p.id == product.id:
+            products[i] = product
+            return product
+    return {"message": "Product not found"}
