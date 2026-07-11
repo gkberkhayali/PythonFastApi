@@ -5,7 +5,9 @@ app = FastAPI()
 
 products = [
     Product(id=1, name="Product 1", description="Description 1", price=10.99, quantity=100),
-    Product(id=2, name="Product 2", description="Description 2", price=20.99, quantity=50)
+    Product(id=2, name="Product 2", description="Description 2", price=20.99, quantity=50),
+    Product(id=3, name="Product 3", description="Description 3", price=30.99, quantity=25), 
+    Product(id=4, name="Product 4", description="Description 4", price=40.99, quantity=10) 
 ]
 
 @app.get("/")
@@ -15,3 +17,16 @@ def welcome():
 @app.get("/products")
 def get_all_products():
    return products
+
+
+@app.get("/get_product_by_id/{id}")
+def get_product_by_id(id: int):
+    return next((product for product in products if product.id == id), None)  # Return the first product if not found
+
+@app.get("/get_product_by_id_2/{id}")
+def get_product_by_id(id: int):
+    for product in products:
+        if product.id == id:
+            return product
+    return None  # Return None if not found
+
