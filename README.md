@@ -1,5 +1,1 @@
-Tech Stack : 
-Python 
-FastAPI
-Uvicorn
-React
+Tech Stack : Python, FastAPI, Uvicorn, React
