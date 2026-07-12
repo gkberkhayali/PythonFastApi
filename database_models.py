@@ -5,6 +5,7 @@ Base = declarative_base()
 
 class Product(Base):
     __tablename__ = "products"
+    __table_args__ = {"schema": "PythonFastApi"}
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     description = Column(String)
