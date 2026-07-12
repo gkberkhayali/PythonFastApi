@@ -1,2 +1,2 @@
-Tech Stack : Python, FastAPI, Uvicorn, React , Sqlalchemy, Pydantic 
+Tech Stack : Python, FastAPI, React, Postgresql, Uvicorn, Sqlalchemy, Pydantic 
 
