@@ -3,11 +3,24 @@ from models import Product
 from database import session
 from database import engine
 from sqlalchemy.orm import Session
-
+from fastapi.middleware.cors import CORSMiddleware
 import database_models
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000"
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,            # Allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],              # GET, POST, PUT, DELETE...
+    allow_headers=["*"],              # Authorization, Content-Type...
+)
 
 database_models.Base.metadata.create_all(bind=engine)  # Create tables in the database
 
@@ -48,8 +61,7 @@ def get_product_by_id(id: int, db: Session = Depends(get_db)):
 def add_product(product: Product, db: Session = Depends(get_db)):
     db.add(database_models.Product(**product.model_dump()))
     db.commit()
-    db.refresh(database_models.Product)
-    return database_models.Product
+    return "Product is added successfully"
 
 @app.put("/products/{id}")
 def update_product(id: int, product: Product, db: Session = Depends(get_db)):
